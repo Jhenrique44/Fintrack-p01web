@@ -1,0 +1,62 @@
+<mat-toolbar color="primary">
+    <span>FinTrack</span>
+    <span class="spacer"></span>
+    <span class="user-name">Hello, {{ userName }}"></span>
+    <button mat-icon-button (click)="logout()" title="Logout">
+        <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="dashboard-container">
+    <div class="cards-row">
+        <mat-card class="balance-card income">
+            <mat-card-content>
+                <mat-icon>trending_up</mat-icon>
+                <div class="card-info">
+                    <span class="card-label">Income</span>
+                    <span class="card-value">{{ balance.totalIncome | currency : 'BRL'}}</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="balance-card expense">
+            <mat-card-content>
+                <mat-icon>trending_down</mat-icon>
+                <div class="card-info">
+                    <span class="card-label">Expense</span>
+                    <span class="card-value">{{ balance.totalExpense | currency : 'BRL'}}</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="actions-row">
+        <button mat-raised-button color="primary" (click)="navigateTo('/transactions')">
+            <mat-icon>receipt_long</mat-icon>
+            <span>Transactions</span>
+        </button>
+        <button mat-raised-button color="accent" (click)="navigateTo('/categories')">
+            <mat-icon>category</mat-icon>
+            <span>Categories</span>
+        </button>
+    </div>
+    <mat-card class="recent-card">  
+        <mat-card-header>
+            <mat-card-title>Recent Transactions</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div *ngIf="loading">Loading transactions...</div>
+            <div *ngIf="!loading && recentTransactions.length === 0">No recent transactions found.</div>
+            <div *ngFor="let t of recentTransactions" class="transaction-item"
+                [class.income]="t.type === 'income'"
+                [class.expense]="t.type === 'expense'">
+            >
+            <div class="transaction-info">
+                <span class="transaction-description">{{ t.description }}</span>
+                <span class="transaction-category">{{ t.categoryName }}</span>
+            </div>
+            <span class="transaction-amount">
+                {{ t.type === 'income' ? '+' : '-' }} {{ t.amount | currency : 'BRL' }}
+            </span>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

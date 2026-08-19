@@ -15,4 +15,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/auth/register/register.component').then((m) => m.RegisterComponent),
   },
+  { 
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./pages/dashboard/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+  }
 ];
