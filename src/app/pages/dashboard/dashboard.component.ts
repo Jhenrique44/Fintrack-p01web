@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Balance, Transaction, TransactionService } from '../../../services/service/transaction.service';
-import { AuthService } from '../../../services/service/auth.service';
+import { Balance, Transaction, TransactionService } from '../../services/service/transaction.service';
+import { AuthService } from '../../services/service/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
